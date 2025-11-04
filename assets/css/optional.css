@@ -1,0 +1,130 @@
+<style>
+/* ==========================================================================
+   OPTIONAL: ActivityPub Notes presentation helpers
+   - Scope: Style only "Note" items rendered by the Notes integration script
+   - Theme-friendly: Inherits fonts and colors; uses --ghost-accent-color
+   - Drop-in: Works with Casper, Edition, Dawn, Ease, and most theme variants
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1) Color variables (follow the theme’s accent)
+   - Uses Ghost’s --ghost-accent-color if present; otherwise mild teal fallback.
+   - No font changes; we inherit the theme’s typography.
+   -------------------------------------------------------------------------- */
+:root {
+  --note-accent: var(--ghost-accent-color, #1479A5);
+  --note-accent-10: color-mix(in srgb, var(--note-accent) 10%, transparent);
+  --note-accent-15: color-mix(in srgb, var(--note-accent) 15%, transparent);
+  --note-border: color-mix(in srgb, var(--note-accent) 55%, #000 0%);
+}
+
+/* --------------------------------------------------------------------------
+   2) Note card accent
+   - Adds a subtle left border + faint background wash to distinguish Notes
+   - Keeps your theme’s spacing/layout intact
+   -------------------------------------------------------------------------- */
+.tag-note {
+  border-left: 3px solid var(--note-border);
+  background: linear-gradient(to right, var(--note-accent-10), transparent 56px);
+  animation: noteFadeIn .35s ease-out both;
+}
+
+/* --------------------------------------------------------------------------
+   3) Date & “Note” badge
+   - Relies on your theme’s date styling, nudges readability a bit
+   - Badge borrows accent color without overwhelming the layout
+   -------------------------------------------------------------------------- */
+.tag-note .archive-post-date {
+  display: block;          /* ensure visible even in micro layouts */
+  opacity: .9;
+}
+
+.tag-note .archive-post-tags {
+  display: block;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,.06);
+}
+
+.tag-note .note-badge {
+  display: inline-block;
+  padding: .25rem .5rem;
+  border-radius: 4px;
+  background: var(--note-accent-10);
+  color: var(--note-accent);
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   4) Links inside Notes
+   - Keep links readable and clearly interactive
+   - Subtle background hover using the accent color
+   -------------------------------------------------------------------------- */
+.tag-note .archive-post-excerpt a {
+  color: var(--note-accent);
+  text-decoration: none;
+  background: var(--note-accent-10);
+  padding: .15rem .4rem;
+  border-radius: 4px;
+  transition: background-color .15s ease;
+  word-break: break-word;      /* prevent overflow on long URLs */
+}
+.tag-note .archive-post-excerpt a:hover {
+  background: var(--note-accent-15);
+}
+
+/* --------------------------------------------------------------------------
+   5) Attachments (images)
+   - Renders attachments like Koenig image cards for theme compatibility
+   - Keeps images responsive and crisp
+   -------------------------------------------------------------------------- */
+.note-attachments .kg-image-card { 
+  margin: .85rem 0;
+}
+.note-attachments .kg-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: #f8f8f8;         /* gentle placeholder behind transparent PNGs */
+}
+
+/* Also allow native figure/img to benefit if the script injects raw HTML */
+.tag-note .archive-post-excerpt figure { margin: .85rem 0; }
+.tag-note .archive-post-excerpt img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   6) Motion
+   - Lightweight entrance animation for newly injected Notes
+   -------------------------------------------------------------------------- */
+@keyframes noteFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   7) Small-screen refinements
+   - Keep badges readable; cap overly tall images on tiny viewports
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .tag-note .archive-post-date { font-size: .95rem; }
+  .tag-note .archive-post-excerpt a { font-size: .95rem; }
+  .tag-note .archive-post-excerpt img { max-height: 320px; object-fit: contain; }
+}
+
+/* --------------------------------------------------------------------------
+   8) Dark mode nuance (optional)
+   - Slightly raise contrast of the divider in dark contexts
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  .tag-note .archive-post-tags {
+    border-top-color: rgba(255,255,255,.08);
+  }
+}
+</style>
