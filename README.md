@@ -195,21 +195,10 @@ It's fully optional — you can skip it if your theme already styles Notes.
 
 ---
 
-## 🖼️ Screenshots
+## 🖼️ Screenshot
 
-You can include before/after screenshots or a short clip in your repo:
+![GhostNoteStream in action](/GhostNoteStream-Screenshot.jpg)
 
-```
-/docs/screenshot-light.png
-/docs/screenshot-dark.png
-```
-
-Then add:
-
-```markdown
-![GhostNoteStream – Light Theme](docs/screenshot-light.png)
-![GhostNoteStream – Dark Theme](docs/screenshot-dark.png)
-```
 
 ---
 
